@@ -10,7 +10,7 @@ CORS(title)
 @title.route('/label', methods=['POST'])
 def add_label():
     content_type = request.headers.get('Content-Type')
-    if content_type != 'application/json':
+    if not content_type.startswith('application/json'):
         return "Content-type not supported!", 400
 
     request_json = request.json

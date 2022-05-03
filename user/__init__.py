@@ -10,7 +10,7 @@ CORS(user)
 @user.route('/create', methods=['POST'])
 def create_user():
     content_type = request.headers.get('Content-Type')
-    if content_type != 'application/json':
+    if not content_type.startswith('application/json'):
         return "Content-type not supported!", 400
 
     request_json = request.json
@@ -48,6 +48,7 @@ def get_user_ranking():
 
     for user in users:
         user_data = {}
+        user_data['user_id'] = user.id
         user_data['username'] = user.username
         user_data['score'] = user.score
         users_data.append(user_data)
