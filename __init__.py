@@ -9,9 +9,9 @@ def create_app():
     app = Flask('clickbait-backend')
     CORS(app)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Kiepski7890@localhost/clickbait-db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLICKBAIT_DATABASE_URI')
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.secret_key = 'secret string'
+    app.secret_key = os.getenv('SECRET_KEY')
 
     db.init_app(app)
     db.create_all(app=app)
